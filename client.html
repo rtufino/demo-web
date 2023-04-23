@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html>
+   <head>
+      <script type = "text/javascript">
+      
+      	var conectado = false;
+      
+         function WebSocketTest() {
+            if ("WebSocket" in window) {
+               
+               if (!conectado){
+	                var socket = new WebSocket("ws://localhost:8080");
+	            }
+               
+	       		socket.addEventListener('open', function (event) {
+				  console.log('Conectado al servidor!');
+				  socket.send('Hola servidor!');
+				});
+				
+				socket.addEventListener('message', function (event) {
+				  var msg = `Recibido: ${event.data}`
+				  console.log(msg);
+				  alert(msg)
+				});
+	       
+                socket.addEventListener('close', function (event) {
+				  var msg = `Conexión cerrada`;
+				  console.log(msg)
+				  alert(msg)
+				});
+            }
+         }
+      </script>
+		
+   </head>
+   
+   <body>
+      <div id = "sse">
+         <a href = "javascript:WebSocketTest()">Ejecutar Websocket</a>
+      </div>
+      
+   </body>
+</html>
